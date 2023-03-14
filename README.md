@@ -240,12 +240,11 @@ If an optional callback parameter was passed, the callback function will be call
 const tg = window.Telegram.WebApp
 
 tg.showScanQrPopup(
-  {
-    text: 'capture',
-  },
+  { text: 'capture' },
   callback
+)
 
-tg.closeScanQrPopup())
+tg.closeScanQrPopup()
 ```
 
 ## App ready?
