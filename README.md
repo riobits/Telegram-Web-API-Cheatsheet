@@ -28,7 +28,7 @@ You can use the api's css variables so your web app will match the user's telegr
 
 `var(--tg-theme-button-text-color)`
 
-`var(--tg-theme-secondary-bg-coloror)`
+`var(--tg-theme-secondary-bg-color)`
 
 You can also access them using javascript:
 
