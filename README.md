@@ -20,7 +20,7 @@ You can use the api's css variables so your web app will match the user's telegr
 
 `var(--tg-theme-text-color)`
 
-`var(--tg-theme-hint-color))`
+`var(--tg-theme-hint-color)`
 
 `var(--tg-theme-link-color)`
 
