@@ -255,3 +255,12 @@ A method that informs the Telegram app that the Web App is ready to be displayed
 const tg = window.Telegram.WebApp
 tg.ready()
 ```
+
+## Exapnd App (fullscreen)
+
+```js
+const tg = window.Telegram.WebApp
+tg.isExpanded
+tg.expand()
+```
+
