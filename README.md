@@ -84,7 +84,7 @@ if (hex(HMAC_SHA256(data_check_string, secret_key)) == hash) {
 Using javascript you can validate the data like that:
 
 ```js
-const verifyTelegramWebAppData = async (
+const verifyTelegramWebAppData = (
   telegramInitData: string
 ): Promise<boolean> => {
   // The data is a query string, which is composed of a series of field-value pairs.
@@ -162,7 +162,7 @@ tg.BackButton.hide()
 ![Example](./assets/main-btn.png)
 
 ```js
-const tg = Telegram.WebApp
+const tg = Telegram.WebApp.MainButton
 
 // properties
 tg.text // you can change the value
