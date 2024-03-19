@@ -1,9 +1,11 @@
-# Telegram Web API
+![banner](./assets/banner.svg)
+
+# Telegram Web API Cheatsheet
 
 To start using the API, put this into your HTML:
 
 ```html
-<script src='https://telegram.org/js/telegram-web-app.js'></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 ```
 
 When you add it to your HTML, you get the `window.Telegram` object and also some CSS style variables.
@@ -36,7 +38,7 @@ const {
   button_color,
   button_text_color,
   secondary_bg_color,
-} = Telegram.WebApp.themeParams
+} = Telegram.WebApp.themeParams;
 ```
 
 ## User Authentication
@@ -78,31 +80,31 @@ Using JavaScript, you can validate the data like that:
 ```javascript
 const verifyTelegramWebAppData = (telegramInitData: string) => {
   // The data is a query string, which is composed of a series of field-value pairs.
-  const encoded = decodeURIComponent(telegramInitData)
+  const encoded = decodeURIComponent(telegramInitData);
 
   // HMAC-SHA-256 signature of the bot's token with the constant string WebAppData used as a key.
-  const secret = crypto.createHmac('sha256', 'WebAppData').update(botToken)
+  const secret = crypto.createHmac("sha256", "WebAppData").update(botToken);
 
   // Data-check-string is a chain of all received fields'.
-  const arr = encoded.split('&')
-  const hashIndex = arr.findIndex((str) => str.startsWith('hash='))
-  const hash = arr.splice(hashIndex)[0].split('=')[1]
+  const arr = encoded.split("&");
+  const hashIndex = arr.findIndex((str) => str.startsWith("hash="));
+  const hash = arr.splice(hashIndex)[0].split("=")[1];
   // Sorted alphabetically
-  arr.sort((a, b) => a.localeCompare(b))
+  arr.sort((a, b) => a.localeCompare(b));
   // In the format key=<value> with a line feed character ('\n', 0x0A) used as separator
   // e.g., 'auth_date=<auth_date>\nquery_id=<query_id>\nuser=<user>
-  const dataCheckString = arr.join('\n')
+  const dataCheckString = arr.join("\n");
 
   // The hexadecimal representation of the HMAC-SHA-256 signature of the data-check-string with the secret key
   const _hash = crypto
-    .createHmac('sha256', secret.digest())
+    .createHmac("sha256", secret.digest())
     .update(dataCheckString)
-    .digest('hex')
+    .digest("hex");
 
   // If hash is equal, the data may be used on your server.
   // Complex data types are represented as JSON-serialized objects.
-  return _hash === hash
-}
+  return _hash === hash;
+};
 ```
 
 Now you made sure that the user who uses your app is the real one and also they use the Telegram app; now your app is secure!
@@ -112,10 +114,10 @@ Now you made sure that the user who uses your app is the real one and also they 
 After authenticating the user from the backend, we can go back to the frontend and get the user's data:
 
 ```javascript
-const params = new URLSearchParams(Telegram.WebApp.initData)
+const params = new URLSearchParams(Telegram.WebApp.initData);
 
-const userData = Object.fromEntries(params)
-userData.user = JSON.parse(userData.user)
+const userData = Object.fromEntries(params);
+userData.user = JSON.parse(userData.user);
 
 // Now userData is ready to use!
 ```
@@ -125,26 +127,26 @@ userData.user = JSON.parse(userData.user)
 ![Example](./assets/back-btn.png)
 
 ```javascript
-const tg = Telegram.WebApp
+const tg = Telegram.WebApp;
 
 // Show the back button
-tg.BackButton.show()
+tg.BackButton.show();
 
 // Check if the button is visible
-tg.BackButton.isVisible
+tg.BackButton.isVisible;
 
 // Click Event
 const goBack = () => {
   // Callback code
-}
+};
 
-tg.BackButton.onClick(goBack)
+tg.BackButton.onClick(goBack);
 
 // Remove Click Event
-tg.BackButton.offClick(goBack)
+tg.BackButton.offClick(goBack);
 
 // Hide the back button
-tg.BackButton.hide()
+tg.BackButton.hide();
 ```
 
 ## Main Button
@@ -152,28 +154,28 @@ tg.BackButton.hide()
 ![Example](./assets/main-btn.png)
 
 ```javascript
-const tg = Telegram.WebApp.MainButton
+const tg = Telegram.WebApp.MainButton;
 
 // Properties
-tg.text // You can change the value
-tg.color // You can change the value
-tg.textColor // You can change the value
-tg.isVisible
-tg.isActive
-tg.isProgressVisible
+tg.text; // You can change the value
+tg.color; // You can change the value
+tg.textColor; // You can change the value
+tg.isVisible;
+tg.isActive;
+tg.isProgressVisible;
 
 // Events
-tg.onClick(callback)
-tg.offClick(callback)
+tg.onClick(callback);
+tg.offClick(callback);
 
 // Methods
-tg.setText('buy')
-tg.show()
-tg.hide()
-tg.enable() // Default
-tg.disable() // If the button is disabled, then it will not work when clicked
-tg.showProgress(true) // Shows a spinning icon; if you passed into it `false`, then it will disable the button when loading
-tg.hideProgress()
+tg.setText("buy");
+tg.show();
+tg.hide();
+tg.enable(); // Default
+tg.disable(); // If the button is disabled, then it will not work when clicked
+tg.showProgress(true); // Shows a spinning icon; if you passed into it `false`, then it will disable the button when loading
+tg.hideProgress();
 ```
 
 ## Closing Confirmation
@@ -183,9 +185,9 @@ tg.hideProgress()
 When you call this method, it will wait until the user tries to close the app; then it will ask for a confirmation
 
 ```javascript
-const tg = Telegram.WebApp
-tg.enableClosingConfirmation()
-tg.disableClosingConfirmation()
+const tg = Telegram.WebApp;
+tg.enableClosingConfirmation();
+tg.disableClosingConfirmation();
 ```
 
 ## Open a Link
@@ -193,8 +195,8 @@ tg.disableClosingConfirmation()
 In a browser
 
 ```javascript
-const tg = window.Telegram.WebApp
-tg.openLink('https://youtube.com')
+const tg = window.Telegram.WebApp;
+tg.openLink("https://youtube.com");
 ```
 
 ## Show Popup
@@ -202,30 +204,28 @@ tg.openLink('https://youtube.com')
 ![Example](./assets/popup.png)
 
 ```javascript
-const tg = Telegram.WebApp
+const tg = Telegram.WebApp;
 tg.showPopup(
   {
-    title: 'Sample Title', // Optional
-    message: 'Sample message',
-    buttons: [{ type: 'destructive', text: 'oh hell nah' }], // Optional
+    title: "Sample Title", // Optional
+    message: "Sample message",
+    buttons: [{ type: "destructive", text: "oh hell nah" }], // Optional
   },
   callback
-)
+);
 ```
 
 More on button types [here](https://core.telegram.org/bots/webapps#popupbutton)
 
 ### Show Alert
 
-
-
 ![Example](./assets/sample_alert.png)
 
 If an optional callback parameter was passed, the callback function will be called, and the field id of the pressed button will be passed as the first argument.
 
 ```javascript
-const tg = window.Telegram.WebApp
-tg.showAlert('sample alert', callback)
+const tg = window.Telegram.WebApp;
+tg.showAlert("sample alert", callback);
 ```
 
 ### Show Confirm
@@ -239,14 +239,11 @@ If an optional callback parameter was passed, the callback function will be call
 If an optional callback parameter was passed, the callback function will be called, and the text from the QR code will be passed as the first argument. Returning true inside this callback function causes the popup to be closed.
 
 ```javascript
-const tg = window.Telegram.WebApp
+const tg = window.Telegram.WebApp;
 
-tg.showScanQrPopup(
-  { text: 'capture' },
-  callback
-)
+tg.showScanQrPopup({ text: "capture" }, callback);
 
-tg.closeScanQrPopup()
+tg.closeScanQrPopup();
 ```
 
 ## App Ready?
@@ -254,17 +251,18 @@ tg.closeScanQrPopup()
 A method that informs the Telegram app that the Web App is ready to be displayed.
 
 ```javascript
-const tg = window.Telegram.WebApp
-tg.ready()
+const tg = window.Telegram.WebApp;
+tg.ready();
 ```
 
 ## Expand App (Fullscreen)
 
 ```javascript
-const tg = window.Telegram.WebApp
-tg.isExpanded
-tg.expand()
+const tg = window.Telegram.WebApp;
+tg.isExpanded;
+tg.expand();
 ```
 
 ## Contributing
+
 Feel free to contribute to this cheatsheet!
