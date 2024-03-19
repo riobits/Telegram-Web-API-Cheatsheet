@@ -76,9 +76,7 @@ if (hex(HMAC_SHA256(data_check_string, secret_key)) == hash) {
 Using JavaScript, you can validate the data like that:
 
 ```javascript
-const verifyTelegramWebAppData = (
-  telegramInitData: string
-): Promise<boolean> => {
+const verifyTelegramWebAppData = (telegramInitData: string) => {
   // The data is a query string, which is composed of a series of field-value pairs.
   const encoded = decodeURIComponent(telegramInitData)
 
