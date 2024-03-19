@@ -138,10 +138,10 @@ const goBack = () => {
   // Callback code
 }
 
-onClick(goBack)
+tg.BackButton.onClick(goBack)
 
 // Remove Click Event
-offClick(goBack)
+tg.BackButton.offClick(goBack)
 
 // Hide the back button
 tg.BackButton.hide()
@@ -265,3 +265,6 @@ const tg = window.Telegram.WebApp
 tg.isExpanded
 tg.expand()
 ```
+
+## Contributing
+Feel free to contribute to this cheatsheet!
